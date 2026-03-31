@@ -1,0 +1,30 @@
+# Compiler
+CXX = g++
+CXXFLAGS = -Wall -std=c++11
+
+# a) Build module .o
+LinkedList.o: LinkedList.cpp LinkedList.h
+	$(CXX) $(CXXFLAGS) -c LinkedList.cpp
+
+# b) Build demo
+demo: demo.cpp LinkedList.o
+	$(CXX) $(CXXFLAGS) -o demo demo.cpp LinkedList.o
+
+# c) Run demo
+run_demo: demo
+	./demo
+
+# d) Build test
+test: test.cpp LinkedList.o
+	$(CXX) $(CXXFLAGS) -o test test.cpp LinkedList.o
+
+# e) Run test
+run_test: test
+	./test
+
+# f) Clean everything
+clean:
+	rm -f *.o demo test log.txt
+
+# g) Rebuild from scratch
+rebuild: clean demo test

@@ -1,0 +1,71 @@
+=== LINKED LIST TEST SCENARIO ===
+Starting automated diagnostic tests...
+
+Test 1: Checking initial state...
+Linked List Info:
+State: Empty
+Number of elements: 0
+
+-------------------------------
+
+Test 2: Inserting elements (10, 20, 30) using operator+=...
+Linked List Info:
+State: Has elements
+Number of elements: 3
+Sarting element (Head): 30
+Last element (Tail): 10
+List: 30 -> 20 -> 10
+-------------------------------
+
+Test 3: Searching for value 20 using operator[]...
+Value 20 found at position: 1
+RESULT: PASSED
+
+Test 4: Testing custom DuplicateValueException...
+Caught expected exception: List Error: Value 20 already exists
+RESULT: PASSED
+
+Test 5: Updating value 20 to 25 using operator%=...
+Linked List Info:
+State: Has elements
+Number of elements: 3
+Sarting element (Head): 30
+Last element (Tail): 10
+List: 30 -> 25 -> 10
+-------------------------------
+
+Test 6: Deleting start element using operator-=...
+Linked List Info:
+State: Has elements
+Number of elements: 2
+Sarting element (Head): 25
+Last element (Tail): 10
+List: 25 -> 10
+-------------------------------
+
+Test 7: Testing Deep Copy (Copy Constructor)...
+Original list unchanged, Copy contains 100:
+RESULT: PASSED (Deep copy verified)
+
+Test 8: Testing operator== and operator!=...
+Comparison logic: PASSED
+
+Test 9: Clearing list using operator!...
+Linked List Info:
+State: Empty
+Number of elements: 0
+
+-------------------------------
+RESULT: PASSED
+
+Test 10: Testing standard exception on empty delete...
+Caught expected std::out_of_range: List is empty
+RESULT: PASSED
+
+=================================
+TEST SUMMARY:
+Total Tests: 10
+Passed: 10
+Failed: 0
+All diagnostic data written to log.txt
+=================================
