@@ -5,7 +5,11 @@
 
 using namespace std;
 
-namespace theList {
+namespace TheList {
+
+    DuplicateValueException::DuplicateValueException(const std::string& msg) 
+        : std::runtime_error("List Error: " + msg) {
+    }
     
     struct Node {
         int data;
@@ -18,10 +22,12 @@ namespace theList {
     };
 
     class LinkedList::Impl {
-    public:
+    friend class LinkedList;
+    private:
         Node* head;
         Node* tail;
 
+    public:
         Impl(){
             head = NULL;
             tail = NULL;
@@ -157,11 +163,11 @@ namespace theList {
 
     };
 
-    LinkedList::LinkedList(){
+    LinkedList::LinkedList() {
         pimpl = new Impl();
     }
 
-    LinkedList::LinkedList(const LinkedList& other){
+    LinkedList::LinkedList(const LinkedList& other) {
     pimpl = new Impl(*other.pimpl);
     }
 
@@ -169,7 +175,7 @@ namespace theList {
     return pimpl->toString();
     }
 
-    LinkedList& LinkedList::operator=(const LinkedList& other){
+    LinkedList& LinkedList::operator=(const LinkedList& other) {
     if (this != &other){
         delete pimpl;
         pimpl = new Impl(*other.pimpl);
@@ -177,11 +183,11 @@ namespace theList {
     return *this;
     }
 
-    LinkedList::~LinkedList(){
+    LinkedList::~LinkedList() {
         delete pimpl;
     }
 
-    void LinkedList::insertStart(int data){
+    void LinkedList::insertStart(int data) {
         pimpl->insert(data);
     }
 
@@ -189,7 +195,7 @@ namespace theList {
         pimpl->remove();
     }
 
-    void LinkedList::update(int old, int next){
+    void LinkedList::update(int old, int next) {
         pimpl->update(old, next);
     }
 
@@ -199,11 +205,19 @@ namespace theList {
 
     void LinkedList::operator!() {
         pimpl->clear();
-        }
+    }
 
-    void LinkedList::operator+=(int data) { insertStart(data); }
-    void LinkedList::operator-=(int) { deleteStart(); }
-    void LinkedList::operator%=(pair<int, int> v) { update(v.first, v.second); }
+    void LinkedList::operator+=(int data) {
+        insertStart(data);
+    }
+
+    void LinkedList::operator-=(int) {
+        deleteStart();
+    }
+
+    void LinkedList::operator%=(pair<int, int> v) {
+        update(v.first, v.second);
+    }
 
     bool LinkedList::operator==(const LinkedList& other) const {
         Node* curr1 = pimpl->head;
@@ -234,9 +248,17 @@ namespace theList {
         return (curr1 == NULL && curr2 != NULL);
     }
 
-    bool LinkedList::operator>(const LinkedList& other) const { return other < *this; }
-    bool LinkedList::operator<=(const LinkedList& other) const { return !(*this > other); }
-    bool LinkedList::operator>=(const LinkedList& other) const { return !(*this < other); }  
+    bool LinkedList::operator>(const LinkedList& other) const {
+        return other < *this;
+    }
+
+    bool LinkedList::operator<=(const LinkedList& other) const {
+        return !(*this > other);
+    }
+
+    bool LinkedList::operator>=(const LinkedList& other) const {
+        return !(*this < other);
+    }
 
     int LinkedList::operator[](int value) const {
     return pimpl->findValue(value);

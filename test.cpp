@@ -6,7 +6,7 @@
 #include <stdexcept>
 
 using namespace std;
-using namespace theList;
+using namespace TheList;
 
 // Helper class to duplicate output to stdout and log.txt
 class Logger {

@@ -7,23 +7,31 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace theList {
+namespace TheList {
 
     class DuplicateValueException : public std::runtime_error {
     public:
-        DuplicateValueException(const std::string& msg) 
-            : std::runtime_error("List Error: " + msg) {}
+        DuplicateValueException(const std::string& msg);
     };
 
     class LinkedList {
-    public:
-        
-        std::string toString() const;
+    private:
+        class Impl;
+        Impl* pimpl;
 
+    public:
+        std::string toString() const;
         LinkedList();
         LinkedList(const LinkedList& other);//overriden default copy contstructor to make deep copy
         LinkedList& operator=(const LinkedList& other);
         ~LinkedList();
+
+        bool operator==(const LinkedList& other) const;
+        bool operator!=(const LinkedList& other) const;
+        bool operator<(const LinkedList& other) const;
+        bool operator>(const LinkedList& other) const;
+        bool operator<=(const LinkedList& other) const;
+        bool operator>=(const LinkedList& other) const;        
 
         void insertStart(int data);
         void deleteStart();
@@ -36,16 +44,6 @@ namespace theList {
         void operator!();
         int operator[](int value) const;
 
-        bool operator==(const LinkedList& other) const;
-        bool operator!=(const LinkedList& other) const;
-        bool operator<(const LinkedList& other) const;
-        bool operator>(const LinkedList& other) const;
-        bool operator<=(const LinkedList& other) const;
-        bool operator>=(const LinkedList& other) const;
-
-    private:
-        class Impl;
-        Impl* pimpl;
     };
 }
 #endif
